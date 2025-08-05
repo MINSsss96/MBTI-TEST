@@ -21,7 +21,7 @@ body{
   height: 20px;
   background-color: #ffb103;
   border-radius: 10px;
-  transition: 0.5s;
+  transition: 0.2s;
 }
 
 .question-box{
@@ -57,5 +57,5 @@ margin-bottom: 30px;
 .question-box .choice{
   border-radius: 120px;
   font-size: 22px;
-  
+
 }
