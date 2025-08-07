@@ -14,36 +14,67 @@ console.log(mbtis.intp)
 // http://127.0.0.1:5501/result.html?mbti=infp
 // 쿼리 스트링 가져와야함
 
-document.addEventListener("DOMContentLoaded", () => {
-  // 1. MBTI 값 가져오기
-  const mbti = new URLSearchParams(location.search).get('mbti');
-  const index = mbtis[mbti];
-  const result = results[index];
+const mbti = new URLSearchParams(location.search).get('mbti')
+console.log(mbtis[mbti])
 
-  // 2. DOM 요소 선택
-  const titleEl = document.querySelector('.title');
-  const characterEl = document.querySelector('.character');
-  const boxEls = document.querySelectorAll('.box');
-  const jobEls = document.querySelectorAll('.job');
-  const lectureImgEl = document.querySelector('.lecture-img');
-  const lectureLinkEl = document.querySelector('.lecture-link');
+const resultMbti = results[mbtis[mbti]]
+console.log(resultMbti)
 
-  // 3. innerHTML 및 속성 설정
-  if (titleEl) titleEl.innerHTML = result.title;
-  if (characterEl) characterEl.setAttribute('src', result.character);
+// 1. 각각의 태그를 지정해야 함.
+const titleEl = document.querySelector(".page-title")
+const characterEl = document.querySelector(".character")
+const boxEls = document.querySelectorAll('.box')
+const jobsEls = document.querySelectorAll('.job')
+const lectureEl = document.querySelector(".lecture")
+const lectureImgEl = document.querySelector(".lecture > img")
 
-  boxEls.forEach((el, i) => {
-    el.innerHTML = result.results[i] || '';
-  });
+// 위의 내용에 innerHTML 로 표시
+// 단 querySelectorAll 로 가져온 아이들은
+// forEach 구문을 이용해서 처리(문법은 찾아서)
 
-  jobEls.forEach((el, i) => {
-    el.innerHTML = result.jobs[i] || '';
-  });
+titleEl.innerHTML = resultMbti.title
+characterEl.src = resultMbti.character
 
-  if (lectureImgEl) lectureImgEl.setAttribute('src', result.lectureImg);
-  if (lectureLinkEl) lectureLinkEl.setAttribute('href', result.lectureUrl);
-});
-console.log(mbtis.infp)
+boxEls.forEach(function(box,i){box.innerHTML=resultMbti.results[i]})
+
+jobsEls.forEach((job, i) => {job.innerHTML = resultMbti.jobs[i]})
+lectureEl.href = resultMbti.lectureUrl 
+lectureImgEl.src = resultMbti.lectureImg
+
+
+
+// document.addEventListener("DOMContentLoaded", () => {
+//   // 1. MBTI 값 가져오기
+//   const mbti = new URLSearchParams(location.search).get('mbti');
+//   const index = mbtis[mbti];
+//   const result = results[index];
+
+//   // 2. DOM 요소 선택
+//   const titleEl = document.querySelector('.title');
+//   const characterEl = document.querySelector('.character');
+//   const boxEls = document.querySelectorAll('.box');
+//   const jobEls = document.querySelectorAll('.job');
+//   const lectureImgEl = document.querySelector('.lecture-img');
+//   const lectureLinkEl = document.querySelector('.lecture-link');
+
+//   // 3. innerHTML 및 속성 설정
+//   if (titleEl) titleEl.innerHTML = result.title;
+//   if (characterEl) characterEl.setAttribute('src', result.character);
+
+//   boxEls.forEach((el, i) => {
+//     el.innerHTML = result.results[i] || '';
+//   });
+
+//   jobEls.forEach((el, i) => {
+//     el.innerHTML = result.jobs[i] || '';
+//   });
+
+//   if (lectureImgEl) lectureImgEl.setAttribute('src', result.lectureImg);
+//   if (lectureLinkEl) lectureLinkEl.setAttribute('href', result.lectureUrl);
+// });
+
+
+// console.log(mbtis.infp)
 // const mbti = new URLSearchParams(location.search).get('mbti')
 // console.log(mbtis[mbti])
 // const mbti = new URLSearchParams(location.search).get('mbti');
